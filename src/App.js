@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
-
+import Header from './Component/Header'
+import Card from './Component/Card'
+import Footer from './Component/Footer'
+import Chats from './Component/Chats'
+import Setting from './Component/Setting'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import ChatScreen from './Component/ChatScreen'
+// you might use <Header/> several times in App
+// ":" in ":person" means any variable
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+        <Route path='/chats/:person'>
+            <Header backButton='/chats'/>
+            <ChatScreen/>
+          </Route>
+          <Route path='/chats'>
+            <Header backButton='/'/>
+            <Chats/>
+          </Route>
+          <Route path='/setting'>
+            <Header />
+            <Setting/>
+          </Route>
+          <Route path='/'>
+            <Header/>
+            <Card />
+            <Footer />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
